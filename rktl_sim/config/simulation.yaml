@@ -9,7 +9,7 @@ car:
     orient: [0.0, 0.0, 0.01]
 
 ball:
-  init_speed: 0.0
+  init_speed: 0.5
   # direct_at_object: 'goalB' # (goalA, goalB, etc.)
   # init_pose:
   #   pos: [0.0, 0.5, 0.06]
