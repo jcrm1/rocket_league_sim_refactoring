@@ -8,7 +8,7 @@ License:
 
 from rktl_autonomy import RocketLeagueInterface
 from stable_baselines3 import DQN
-from stable_baselines3.common.vec_env import SubprocVecEnv
+from stable_baselines3.common.vec_env import SubprocVecEnv, VecNormalize
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.logger import configure
 from stable_baselines3.common.callbacks import CheckpointCallback
@@ -22,6 +22,7 @@ if __name__ == '__main__':      # this is required due to forking processes
     # to pass launch args, add to env_kwargs: 'launch_args': ['render:=false', 'plot_log:=true']
     env = make_vec_env(RocketLeagueInterface, env_kwargs={'run_id':run_id},
             n_envs=24, vec_env_cls=SubprocVecEnv)
+    env = VecNormalize(env)
 
     model = DQN("MlpPolicy", env)
 
