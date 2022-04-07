@@ -7,7 +7,7 @@ License:
 """
 
 from rktl_autonomy import RocketLeagueInterface
-from stable_baselines3 import PPO
+from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.logger import configure
@@ -23,7 +23,7 @@ if __name__ == '__main__':      # this is required due to forking processes
     env = make_vec_env(RocketLeagueInterface, env_kwargs={'run_id':run_id},
             n_envs=24, vec_env_cls=SubprocVecEnv)
 
-    model = PPO("MlpPolicy", env)
+    model = DQN("MlpPolicy", env)
 
     # log training progress as CSV
     log_dir = expanduser(f'~/catkin_ws/data/rocket_league/{run_id}')
