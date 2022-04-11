@@ -19,6 +19,7 @@ class Car(object):
         self._LENGTH = car_properties['length']
         self._MAX_SPEED = car_properties['max_speed']
         self._THROTTLE_TAU = car_properties['throttle_tau']
+        self._STATIC_FRICTION = car_properties['static_friction']
         self._STEERING_THROW = car_properties['steering_throw']
         self._STEERING_RATE = car_properties['steering_rate']
         self._MAX_CURVATURE = math.tan(self._STEERING_THROW) / self._LENGTH
@@ -48,6 +49,10 @@ class Car(object):
             # transfrom control input to reference angles and velocities
             v_rear_ref = cmd[0] * self._MAX_SPEED
             psi_ref = cmd[1] * self._STEERING_THROW
+
+            # check if throttle can break static friction
+            if abs(cmd[0]) < self._STATIC_FRICTION:
+                v_rear_ref = 0.0
 
             # update rear wheel velocity using 1st order model
             self._v_rear = (self._v_rear - v_rear_ref) * math.exp(-dt/self._THROTTLE_TAU) + v_rear_ref

@@ -101,6 +101,7 @@ class SimulatorROS(object):
         car_properties['length'] = rospy.get_param('/cars/length')
         car_properties['max_speed'] = rospy.get_param('/cars/throttle/max_speed')
         car_properties['throttle_tau'] = rospy.get_param('/cars/throttle/tau')
+        car_properties['static_friction'] = rospy.get_param('/cars/throttle/static_friction')
         car_properties['steering_throw'] = rospy.get_param('/cars/steering/max_throw')
         car_properties['steering_rate'] = rospy.get_param('/cars/steering/rate')
         car_properties['simulate_effort'] = self.mode == SimulatorMode.REALISTIC
@@ -109,7 +110,7 @@ class SimulatorROS(object):
         if self.mode == SimulatorMode.IDEAL:
             noise = None
 
-        self.sim.create_car('car', 
+        self.sim.create_car('car',
             init_pose=rospy.get_param('~car/init_pose', None),
             noise=noise,
             props=car_properties)

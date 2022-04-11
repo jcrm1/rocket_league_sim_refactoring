@@ -22,3 +22,4 @@ cars:
   throttle:
     max_speed: 1.0
     tau: 0.25 # (approx 1 sec to reach max speed)
+    static_friction: 0.5  # below 0.5 effort, the car will not move
