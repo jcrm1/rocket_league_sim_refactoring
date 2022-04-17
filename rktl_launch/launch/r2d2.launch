@@ -12,4 +12,5 @@
     </node>
 
     <include file="$(find rktl_launch)/launch/rocket_league.launch"/>
+    <include file="$(find rktl_game)/launch/game.launch"/>
 </launch>
